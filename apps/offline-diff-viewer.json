@@ -1,0 +1,40 @@
+{
+    "name": "Tyk Offline Diff Viewer",
+    "api_id": "keyless",
+    "org_id": "default",
+    "definition": {
+        "location": "header",
+        "key": "version"
+    },
+    "use_keyless": true,
+    "version_data": {
+        "not_versioned": true,
+        "versions": {
+            "Default": {
+                "name": "Default"
+            }
+        }
+    },
+    "url_rewrites": [
+        {
+            "path": "/_nuxt",
+            "method": "GET",
+            "match_pattern": "/(.*)",
+            "rewriteTo": "/a",
+            "triggers": []
+        }
+    ],
+    "proxy": {
+        "enable_load_balancing": true,
+        "listen_path": "/",
+        "transport": {
+            "ssl_insecure_skip_verify": true,
+            "ssl_force_common_name_check": false
+        },
+        "target_url": "http://offline-diff-viewer:80",
+        "target_list": [
+            "http://offline-diff-viewer:80"
+        ],
+        "strip_listen_path": true
+    }
+}
